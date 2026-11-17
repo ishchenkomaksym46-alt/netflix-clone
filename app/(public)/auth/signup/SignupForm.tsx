@@ -1,6 +1,6 @@
 'use client'
 
-import {FormEvent, ReactHTMLElement, useState} from "react";
+import {useState} from "react";
 import {useRouter} from "next/navigation";
 import {api} from '@/lib/api'
 
@@ -32,12 +32,13 @@ export default function SignupForm() {
         }
 
         try {
-            const response = await api.post('/auth/signup', { username, email, password });
+            const response = await api.post('/auth/signup', { username, email, password }, { withCredentials: true });
             if(response.status === 201) {
+                window.dispatchEvent(new CustomEvent<boolean>('auth-state-changed', { detail: true }));
                 router.push('/');
             }
-        } catch (e: any) {
-            setError(`An error occurred while signing up: ${e.message}`);
+        } catch (e) {
+            setError(`An error occurred while signing up: ${e instanceof Error ? e.message : 'Unknown error'}`);
         } finally {
             setLoading(false);
         }

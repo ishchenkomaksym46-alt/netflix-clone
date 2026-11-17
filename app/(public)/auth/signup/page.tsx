@@ -1,7 +1,7 @@
 import SignupForm from "@/app/(public)/auth/signup/SignupForm";
 
 export const metadata = {
-    title: 'Signup',
+    title: 'Sign up',
 }
 
 export default function Signup() {
