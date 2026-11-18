@@ -91,8 +91,6 @@ export default function Header() {
 
             <div id={"header-links"}>
                 <a href={"/"} className={"text-white hover:text-gray-300"}>Home</a>
-                <a href={"/movies"} className={"text-white hover:text-gray-300"}>Movies</a>
-                <a href={"/series"} className={"text-white hover:text-gray-300"}>Series</a>
                 <a href={"/about"} className={"text-white hover:text-gray-300"}>About</a>
                 <a href={"/subscription"} className={"text-white hover:text-gray-300"}>Subscription</a>
 

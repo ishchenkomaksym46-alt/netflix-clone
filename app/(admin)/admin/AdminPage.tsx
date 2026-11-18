@@ -36,7 +36,6 @@ export default function AdminPage() {
 
             <a href={Links.Users} className='cursor-pointer decoration-0 font-bold'>Manage Users</a>
             <a href={Links.AddMovies} className='cursor-pointer decoration-0 font-bold'>Add Movies</a>
-            <a href={Links.AddSeries} className='cursor-pointer decoration-0 font-bold'>Add Series</a>
         </div>
     )
 }

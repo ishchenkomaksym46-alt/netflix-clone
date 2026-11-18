@@ -17,6 +17,24 @@ export default function UsersPage() {
     const router = useRouter();
 
     useEffect(() => {
+        const checkAuthStatus = async () => {
+            try {
+                const response = await api.get('admin/check', { withCredentials: true });
+
+                if(!response || response.status !== 200) {
+                    console.error('Error checking authentication status:', response);
+                    router.push('/');
+                } else {
+                    console.log('Admin check successful:', response.data);
+                }
+            } catch (error) {
+                console.error('Error checking authentication status:', error);
+                router.push('/');
+            }
+        }
+
+        checkAuthStatus();
+
         const getUsers = async () => {
             setError('');
             setLoading(true);
