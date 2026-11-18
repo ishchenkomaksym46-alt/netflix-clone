@@ -45,29 +45,36 @@ export default function SignupForm() {
     }
 
     return (
-        <div>
-            <h1>Sign Up</h1>
-            <form onSubmit={onSubmit}>
-                <input type="text" placeholder="Username: " value={username}
+        <section className="auth-page">
+            <div className="auth-panel">
+            <p className="eyebrow">Your next story starts here</p>
+            <h1>Create account</h1>
+            <p className="auth-subtitle">Join in and find something great to watch.</p>
+            <form className="auth-form" onSubmit={onSubmit}>
+                <input type="text" placeholder="Username" value={username}
                        onChange={(e) => setUsername(e.target.value)}
                        minLength={3}
                        maxLength={15}
-                        required/>
-                <input type="email" placeholder="Email: "
+                       required/>
+                <input type="email" placeholder="Email address"
                        value={email}
                        onChange={(e) => setEmail(e.target.value)}
-                        required/>
-                <input type="password" placeholder="Password: "
+                       required/>
+                <input type="password" placeholder="Password"
                        value={password}
                        onChange={(e) => setPassword(e.target.value)}
                        minLength={8}
                        required/>
 
-                {error && <p>{error}</p>}
-                {loading && <p>Loading...</p>}
+                {error && <p className="form-feedback form-error" role="alert">{error}</p>}
+                {loading && <p className="form-feedback status-muted">Creating your account...</p>}
 
-                <button type="submit">Sign Up</button>
+                <button className="form-submit" type="submit" disabled={loading}>
+                    {loading ? 'Creating account...' : 'Create account'}
+                </button>
             </form>
-        </div>
+            <p className="auth-footnote">Already have an account? <a href="/auth/login">Sign in</a></p>
+            </div>
+        </section>
     );
 }

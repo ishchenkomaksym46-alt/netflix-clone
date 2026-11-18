@@ -67,27 +67,33 @@ export default function AddMoviesPage() {
     }
 
     return (
-        <div>
-            <h1>Add Movies</h1>
-            <p>Here you can add new movies to the database.</p>
+        <section className="admin-page">
+            <p className="eyebrow">Expand the collection</p>
+            <h1>Add a movie</h1>
+            <p className="admin-intro">Add the details below to bring a new title to the catalog.</p>
             <hr />
 
-            <form onSubmit={onSubmit}>
-                <p>Movie Title:</p>
-                <input type="text" placeholder="Movie Title: " onChange={(e) => setTitle(e.target.value)} required/>
-                <p>Director:</p>
-                <input type="text" placeholder="Director: " onChange={(e) => setDirector(e.target.value)} required/>
-                <p>Year:</p>
-                <input type="number" placeholder="Year: " onChange={(e) => setYear(e.target.value ? parseInt(e.target.value) : '')} required/>
-                <p>Description:</p>
-                <input type="text" placeholder="Description: " onChange={(e) => setDescription(e.target.value)} />
-                <p>Age Rating:</p>
-                <input type="text" placeholder="Age Rating: " onChange={(e) => setAgeRating(e.target.value)} required/>
-                <button type="submit" disabled={loading}>
+            <form className="admin-form" onSubmit={onSubmit}>
+                <label>Movie title
+                    <input type="text" placeholder="Enter the title" onChange={(e) => setTitle(e.target.value)} required/>
+                </label>
+                <label>Director
+                    <input type="text" placeholder="Enter the director's name" onChange={(e) => setDirector(e.target.value)} required/>
+                </label>
+                <label>Release year
+                    <input type="number" min={2000} placeholder="e.g. 2024" onChange={(e) => setYear(e.target.value ? parseInt(e.target.value) : '')} required/>
+                </label>
+                <label>Description
+                    <textarea placeholder="A short description of the movie" onChange={(e) => setDescription(e.target.value)} />
+                </label>
+                <label>Age rating
+                    <input type="text" placeholder="e.g. PG-13" onChange={(e) => setAgeRating(e.target.value)} required/>
+                </label>
+                <button className="form-submit" type="submit" disabled={loading}>
                     {loading ? 'Adding...' : 'Add Movie'}
                 </button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p className="page-error" role="alert">{error}</p>}
             </form>
-        </div>
+        </section>
     )
 }

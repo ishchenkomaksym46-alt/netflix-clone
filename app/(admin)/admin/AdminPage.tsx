@@ -29,13 +29,22 @@ export default function AdminPage() {
     }, [])
 
     return (
-        <div>
-            <h1>Admin Page</h1>
-            <p>Welcome to the admin page!</p>
+        <section className="admin-page">
+            <p className="eyebrow">Control room</p>
+            <h1>Admin dashboard</h1>
+            <p className="admin-intro">Manage your catalog and keep your community in good shape.</p>
             <hr/>
 
-            <a href={Links.Users} className='cursor-pointer decoration-0 font-bold'>Manage Users</a>
-            <a href={Links.AddMovies} className='cursor-pointer decoration-0 font-bold'>Add Movies</a>
-        </div>
+            <div className="admin-actions">
+                <a href={Links.Users} className="admin-action-card">
+                    <strong>Manage users</strong>
+                    <span>Review members and moderate accounts →</span>
+                </a>
+                <a href={Links.AddMovies} className="admin-action-card">
+                    <strong>Add a movie</strong>
+                    <span>Grow the catalog with a new title →</span>
+                </a>
+            </div>
+        </section>
     )
 }

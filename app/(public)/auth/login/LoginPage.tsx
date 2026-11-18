@@ -43,11 +43,14 @@ export default function LoginPage() {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
+        <section className="auth-page">
+            <div className="auth-panel">
+                <p className="eyebrow">Welcome back</p>
+                <h1>Sign in</h1>
+                <p className="auth-subtitle">Pick up where your next favorite story begins.</p>
 
-            <form onSubmit={onSubmit}>
-                <input type="email" placeholder="Email"
+                <form className="auth-form" onSubmit={onSubmit}>
+                <input type="email" placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required/>
@@ -55,10 +58,14 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required/>
-                <button type="submit">Login</button>
-                {loading && <p className={'text-yellow-300'}>Loading...</p>}
-                {error && <p className={'text-red-500'}>{error}</p>}
-            </form>
-        </div>
+                <button className="form-submit" type="submit" disabled={loading}>
+                    {loading ? 'Signing in...' : 'Sign in'}
+                </button>
+                {loading && <p className="form-feedback status-muted">Checking your account...</p>}
+                {error && <p className="form-feedback form-error" role="alert">{error}</p>}
+                </form>
+                <p className="auth-footnote">New to Netflix? <a href="/auth/signup">Create an account</a></p>
+            </div>
+        </section>
     )
 }

@@ -78,27 +78,32 @@ export default function UsersPage() {
     }
 
     return (
-        <div>
-            <h1>Manage Users</h1>
+        <section className="admin-page">
+            <p className="eyebrow">Community</p>
+            <h1>Manage users</h1>
+            <p className="admin-intro">Review member accounts and manage access.</p>
             <hr/>
 
-            {loading && <p className={'text-yellow-300'}>Loading...</p>}
-            {error && <p className={'text-red-500'}>{error}</p>}
+            {loading && <p className="page-loading" role="status">Loading users...</p>}
+            {error && <p className="page-error" role="alert">{error}</p>}
 
-            <ul>
+            <ul className="users-list">
                 {users.map(user => (
-                    <li key={user.id}>
-                        <p>Username: {user.username}</p>
-                        <p>Email: {user.email}</p>
-                        <p>Role: {user.role}</p>
-                        <p>Created At: {new Date(user.createdAt).toLocaleString()}</p>
-
-                        <button className={'font-bold bg-red-600 transform motion-safe:hover:bg-red-800 padding-2 cursor-pointer'}
-                        onClick={() => onBanUser(user.id)}>BAN</button>
-                        <hr/>
+                    <li className="user-card" key={user.id}>
+                        <p><strong>{user.username}</strong>Member</p>
+                        <p><strong>Email</strong>{user.email}</p>
+                        <p><strong>Role</strong><span className="user-role">{user.role}</span></p>
+                        <p><strong>Joined</strong>{new Date(user.createdAt).toLocaleDateString()}</p>
+                        <button
+                            className="ban-button"
+                            onClick={() => onBanUser(user.id)}
+                            disabled={loading}
+                        >
+                            Ban user
+                        </button>
                     </li>
                 ))}
             </ul>
-        </div>
+        </section>
     )
 }

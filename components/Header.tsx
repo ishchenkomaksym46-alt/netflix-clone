@@ -1,5 +1,6 @@
 'use client'
 
+import Link from "next/link";
 import {useEffect, useState} from "react";
 import {api} from "@/lib/api";
 import {useRouter} from "next/navigation";
@@ -86,31 +87,41 @@ export default function Header() {
     }
 
     return (
-        <header id={"main-header"}>
-            <b><h1 id={"header-title"}>Netflix</h1></b>
+        <header id="main-header">
+            <Link className="brand" href="/" aria-label="Netflix home">
+                <span className="brand-mark" aria-hidden="true" />
+                <h1 id="header-title">NETFLIX</h1>
+            </Link>
 
-            <div id={"header-links"}>
-                <a href={"/"} className={"text-white hover:text-gray-300"}>Home</a>
-                <a href={"/about"} className={"text-white hover:text-gray-300"}>About</a>
-                <a href={"/subscription"} className={"text-white hover:text-gray-300"}>Subscription</a>
+            <nav id="header-links" aria-label="Main navigation">
+                <Link href="/">Home</Link>
+                <Link href="/about">About</Link>
+                <Link href="/subscription">Subscription</Link>
+            </nav>
 
+            <div className="header-actions">
                 {!isLoggedIn ? (
                     <>
-                        <a href={"/auth/login"} className={"text-white hover:text-gray-300"}>Log in</a>
-                        <a href={"/auth/signup"} className={"text-white hover:text-gray-300"}>Register</a>
+                        <Link className="header-action" href="/auth/login">Log in</Link>
+                        <Link className="header-action header-action--primary" href="/auth/signup">Join now</Link>
                     </>
                 ) : (
                     <button
-                        className={"bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"}
+                        className="header-action header-action--primary"
                         onClick={onLogoutClick}
+                        disabled={loading}
                     >
                         Log out
                     </button>
                 )}
             </div>
 
-            {loading && <p className={"text-white"}>Checking session...</p>}
-            {error && <p className={"text-red-500"}>{error}</p>}
+            {(loading || error) && (
+                <div className="header-feedback" role={error ? "status" : undefined}>
+                    {loading && <span className="status-muted">Checking session...</span>}
+                    {error && <span className="status-error">{error}</span>}
+                </div>
+            )}
         </header>
     )
 }
