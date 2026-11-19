@@ -3,11 +3,13 @@
 import {ContentProps} from "@/app/(public)/(home)/(content)/(types)/types";
 import {useEffect, useState} from "react";
 import {api} from "@/lib/api";
+import {useRouter} from "next/navigation";
 
 export default function Content() {
     const [content, setContent] = useState<ContentProps[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
+    const router = useRouter();
 
     useEffect(() => {
         const fetchContent = async () => {
@@ -62,7 +64,7 @@ export default function Content() {
                             <p className="movie-description">{item.description}</p>
                             <button
                                 className="movie-watch-button"
-                                onClick={() => alert('Nah I don\'t have rights for it!')}
+                                onClick={() => router.push('/player')}
                             >
                                 <span aria-hidden="true">▶</span>
                                 Watch now
